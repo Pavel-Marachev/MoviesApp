@@ -15,6 +15,8 @@ class MoviesBloc {
     _moviesFetcher.sink.add(itemModel);
   }
 
+  Future<String> filmDefinition() => _repository.filmDefinition();
+
   dispose() {
     _moviesFetcher.close();
   }

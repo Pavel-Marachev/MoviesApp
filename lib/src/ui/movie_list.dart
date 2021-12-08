@@ -1,3 +1,4 @@
+import 'package:bloc_app/src/ui/film_description.dart';
 import 'package:bloc_app/src/ui/movie_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class MovieList extends StatelessWidget {
         stream: bloc.allMovies,
         builder: (context, AsyncSnapshot<ItemModel> snapshot) {
           if (snapshot.hasData) {
-            return CustomScrollView(slivers: buildList(snapshot));
+            return CustomScrollView(slivers: buildList(snapshot, context));
           } else if (snapshot.hasError) {
             return Text(snapshot.error.toString());
           }
@@ -26,10 +27,20 @@ class MovieList extends StatelessWidget {
     );
   }
 
-  List<Widget> buildList(AsyncSnapshot<ItemModel> snapshot) {
+  List<Widget> buildList(
+      AsyncSnapshot<ItemModel> snapshot, BuildContext context) {
     return [
       SliverAppBar(
         title: Text("Popular Movies"),
+        leading: IconButton(
+          icon: Icon(Icons.local_movies_sharp),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => FilmDescription()),
+            );
+          },
+        ),
       ),
       SliverList(
         delegate: SliverChildBuilderDelegate(
