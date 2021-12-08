@@ -1,4 +1,4 @@
-# bloc_app
+# movie_app
 
 A new Flutter application.
 
